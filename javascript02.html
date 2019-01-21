@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Canvas Block</title>
+<script type="text/javascript" src="jquery-1.4.4.min.js"></script>
+</head>
+<body>
+<canvas width="400" height="400" id="myCanvas">
+        <p>Alternate content goes here</p>
+</canvas>
+<script type="text/javascript">
+        $(document).ready(function() {
+                var canvas = document.getElementById("myCanvas");
+                if (canvas.getContext) {
+                        var canvasContext = canvas.getContext("2d");
+                        canvasContext.fillStyle = "blue";
+                        var numBlocks = 4;
+                        var canWidth = $("#myCanvas").attr("width");
+                        var canHeight = $("#myCanvas").attr("height");
+                        var blockWidth = (canWidth/numBlocks) - 2;
+                        var blockHeight = (canHeight/numBlocks) - 2;
+                        var offsetX = 0;
+                        var offsetY = 0;
+                        var colCount = 0;
+                        var numTotal = numBlocks * numBlocks;
+                        for (i = 0; i < numTotal; i++) {
+                                canvasContext.fillRect(offsetX,offsetY,blockWidth,blockHeight);
+                                offsetX = offsetX + blockWidth + 2;
+                                colCount++;
+                                if (colCount == numBlocks) {
+                                        colCount = 0;
+                                        offsetY = offsetY + blockHeight + 2;
+                                        offsetX = 0;
+                                }
+                        }
+                        $("#myCanvas").click(function(f) {
+                                var x = f.pageX - this.offsetLeft;
+                                var y = f.pageY - this.offsetTop;
+                                var xBlock = Math.floor((x / blockWidth));
+                                var yBlock = Math.floor((y / blockHeight));
+                                var xSpan = 0, ySpan = 0;
+                                if (xBlock > 0) {
+                                        xSpan = xBlock * 2;
+                                }
+                                if (yBlock > 0) {
+                                        ySpan = yBlock * 2;
+                                }
+                                var xPos = (blockWidth * xBlock) + xSpan;
+                                var yPos = (blockHeight * yBlock) + ySpan;
+                                canvasContext.clearRect(xPos,yPos,blockWidth,blockHeight);
+                        });
+                } else {
+                        // You could do something else here
+                        // because the browser doesn't support
+                        // the canvas element.
+                }
+        });
