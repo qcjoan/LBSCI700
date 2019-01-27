@@ -35,7 +35,7 @@ hr { size:.5px; height:1px; color:#999999 }
 /* header */
 .header_top { background: #FEFEFE /*url('big_top.gif')*/ no-repeat; color: #FFF; height: 15px }
 .header { padding: 0px 10px 0 10px; }
-.header_bottom { clear: both; background: #FEFEFE /*url('big_bottom.gif')*/ no-repeat; color: #FFF; height: 15px }
+.header_bottom { clear: both; background: #00008b /*url('big_bottom.gif')*/ no-repeat; color: #FFF; height: 15px }
     
 .header_text {
 	width: 100%;
